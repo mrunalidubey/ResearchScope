@@ -1,0 +1,455 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResearchScope | Paper Insights</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #f5f5fc;
+            color: #25243a;
+        }
+
+        nav {
+            background: white;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.04);
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 25px;
+            font-weight: 700;
+            color: #6655e8;
+            text-decoration: none;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #6655e8;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 55px auto;
+            padding: 0 22px;
+        }
+
+        .tag {
+            color: #7968ec;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 21px;
+            margin-bottom: 18px;
+        }
+
+        .subtitle {
+            color: #77758b;
+            line-height: 1.7;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #eceaf7;
+            border-radius: 18px;
+            padding: 28px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 30px rgba(40,30,90,0.04);
+        }
+
+        .heading {
+            margin-bottom: 30px;
+        }
+
+        .details-grid, .insights-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .detail-box {
+            background: #f7f6ff;
+            padding: 18px;
+            border-radius: 12px;
+            overflow-wrap: anywhere;
+        }
+
+        .detail-label {
+            color: #858299;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .detail-value {
+            font-weight: 700;
+        }
+
+        .ai-card {
+            background: linear-gradient(135deg, #ffffff, #f5f2ff);
+        }
+
+        .score-area {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin: 25px 0;
+        }
+
+        .score {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 75px;
+            font-weight: 700;
+            color: #705be9;
+        }
+
+        .score span {
+            font-size: 32px;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 12px;
+            background: #e8e4fa;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #6655e8, #b18cff);
+        }
+
+        .indicator-list, .gap-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .indicator-list li, .gap-list li {
+            background: #f7f6ff;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            color: #514d6a;
+            line-height: 1.7;
+        }
+
+        .indicator-list li::before {
+            content: "✦";
+            color: #806be9;
+            margin-right: 12px;
+        }
+
+        .disclaimer {
+            background: #fff9eb;
+            border: 1px solid #f5e6c2;
+            border-radius: 12px;
+            padding: 16px;
+            color: #78613b;
+            font-size: 13px;
+            line-height: 1.7;
+            margin-top: 22px;
+        }
+
+        .summary-card {
+            background: linear-gradient(135deg, #f1efff, #ffffff);
+            border-color: #e4defe;
+        }
+
+        .insight-text {
+            color: #5e5b73;
+            line-height: 1.9;
+            font-size: 15px;
+        }
+
+        .keyword-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .keyword {
+            background: #efedff;
+            color: #6655d9;
+            border: 1px solid #e1dcff;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* Research gap section */
+
+        .gap-card {
+            background: linear-gradient(135deg, #ffffff, #f2f7ff);
+            border-color: #e0e9fa;
+        }
+
+        .gap-item {
+            background: #f6f8ff;
+            border: 1px solid #e6eafa;
+            border-radius: 12px;
+            padding: 19px;
+            margin-top: 14px;
+        }
+
+        .gap-item h3 {
+            color: #5549bb;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .gap-item p {
+            color: #64627a;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #55536a;
+            background: #faf9ff;
+            padding: 22px;
+            border-radius: 12px;
+            margin-top: 18px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: #6655e8;
+            color: white;
+            padding: 14px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 10px 0 40px;
+        }
+
+        @media(max-width: 700px) {
+            h1 { font-size: 29px; }
+            .details-grid, .insights-grid {
+                grid-template-columns: 1fr;
+            }
+            .card { padding: 21px; }
+            .score { font-size: 60px; }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <a href="/" class="logo">ResearchScope.</a>
+    <a href="/" class="nav-link">← Dashboard</a>
+</nav>
+
+<main class="container">
+
+    <header class="heading">
+        <p class="tag">RESEARCH ANALYTICS</p>
+        <h1>Your Paper <span style="color:#705be9;">Insights</span></h1>
+        <p class="subtitle">{{ message }}</p>
+    </header>
+
+    <section class="card">
+        <p class="tag">DOCUMENT INFORMATION</p>
+        <h2>Uploaded Research Paper</h2>
+
+        <div class="details-grid">
+            <div class="detail-box">
+                <p class="detail-label">File Name</p>
+                <p class="detail-value">{{ filename }}</p>
+            </div>
+            <div class="detail-box">
+                <p class="detail-label">Extracted Characters</p>
+                <p class="detail-value">{{ extracted_text|length }}</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="card ai-card">
+        <p class="tag">AI WRITING ANALYSIS</p>
+        <h2>AI-Likelihood Estimate</h2>
+
+        {% if ai_analysis.score is not none %}
+            <div class="score-area">
+                <div class="score">
+                    {{ ai_analysis.score }}<span>%</span>
+                </div>
+                <p class="subtitle">
+                    Experimental writing-pattern score, not a measurement
+                    of actual AI-generated content.
+                </p>
+            </div>
+
+            <div class="progress-track">
+                <div class="progress-fill"
+                     style="width: {{ ai_analysis.score }}%;">
+                </div>
+            </div>
+
+            <h3>Detected Writing Patterns</h3>
+
+            {% if ai_analysis.indicators %}
+                <ul class="indicator-list">
+                    {% for indicator in ai_analysis.indicators %}
+                        <li>{{ indicator }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="subtitle">No unusual patterns detected.</p>
+            {% endif %}
+        {% else %}
+            <p class="subtitle">{{ ai_analysis.message }}</p>
+        {% endif %}
+
+        <div class="disclaimer">
+            <strong>Important:</strong> This experimental heuristic
+            cannot reliably determine whether AI was used. It does
+            not represent the percentage of AI-generated content.
+        </div>
+    </section>
+
+    <section class="card summary-card">
+        <p class="tag">AUTOMATIC SUMMARY</p>
+        <h2>Paper at a Glance</h2>
+        <p class="insight-text">{{ paper_analysis.summary }}</p>
+    </section>
+
+    <div class="insights-grid">
+
+        <section class="card">
+            <p class="tag">01 · RESEARCH OBJECTIVE</p>
+            <h2>What is the paper about?</h2>
+            <p class="insight-text">{{ paper_analysis.objective }}</p>
+        </section>
+
+        <section class="card">
+            <p class="tag">02 · METHODOLOGY</p>
+            <h2>How was it conducted?</h2>
+            <p class="insight-text">{{ paper_analysis.methodology }}</p>
+        </section>
+
+        <section class="card">
+            <p class="tag">03 · KEY FINDINGS</p>
+            <h2>What did researchers find?</h2>
+            <p class="insight-text">{{ paper_analysis.findings }}</p>
+        </section>
+
+        <section class="card">
+            <p class="tag">04 · KEYWORDS</p>
+            <h2>Important Topics</h2>
+
+            {% if paper_analysis.keywords %}
+                <div class="keyword-list">
+                    {% for keyword in paper_analysis.keywords %}
+                        <span class="keyword">{{ keyword }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="subtitle">No keywords found.</p>
+            {% endif %}
+        </section>
+
+    </div>
+
+    <!-- Potential Research Gaps -->
+
+    <section class="card gap-card">
+        <p class="tag">05 · RESEARCH OPPORTUNITIES</p>
+        <h2>Potential Research Gaps</h2>
+        <p class="subtitle">
+            Areas identified from the limitations and future-work
+            statements in this paper.
+        </p>
+
+        {% if gap_analysis.limitations %}
+            <h3 style="margin-top:25px;">Reported Limitations</h3>
+
+            {% for item in gap_analysis.limitations %}
+                <div class="gap-item">
+                    <p>{{ item }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% if gap_analysis.future_directions %}
+            <h3 style="margin-top:25px;">Future Research Directions</h3>
+
+            {% for item in gap_analysis.future_directions %}
+                <div class="gap-item">
+                    <p>{{ item }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <h3 style="margin-top:25px;">Suggested Research Opportunities</h3>
+
+        {% for suggestion in gap_analysis.suggestions %}
+            <div class="gap-item">
+                <h3>{{ suggestion.title }}</h3>
+                <p>{{ suggestion.description }}</p>
+            </div>
+        {% endfor %}
+
+        <div class="disclaimer">
+            These are preliminary research opportunities based on
+            statements in one paper. They are not verified research
+            gaps. Review related literature before claiming novelty.
+        </div>
+    </section>
+
+    <section class="card">
+        <p class="tag">ORIGINAL DOCUMENT CONTENT</p>
+        <h2>Extracted Research Paper Text</h2>
+
+        {% if extracted_text %}
+            <pre>{{ extracted_text }}</pre>
+        {% else %}
+            <p class="subtitle">No selectable text was found.</p>
+        {% endif %}
+    </section>
+
+    <a href="/" class="back-button">+ Analyze Another Paper</a>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,202 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ResearchScope | Research Paper Analyzer</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="/" class="logo">Research<span>Scope.</span></a>
+
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#upload">Analyze Paper</a>
+            <a href="#about">About</a>
+        </div>
+
+        <a href="#upload" class="nav-button">Get Started</a>
+    </nav>
+
+
+    <main>
+
+        <section class="hero" id="home">
+
+            <div class="hero-content">
+
+                <p class="eyebrow">
+                    YOUR AI-ASSISTED RESEARCH WORKSPACE
+                </p>
+
+                <h1>
+                    Understand Research.<br>
+                    <span>Discover More.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Explore academic papers, extract meaningful insights,
+                    identify important concepts and make research easier
+                    with ResearchScope.
+                </p>
+
+                <a href="#upload" class="primary-button">
+                    Start Analyzing →
+                </a>
+
+                <div class="hero-note">
+                    Built for students, researchers and curious minds.
+                </div>
+
+            </div>
+
+            <div class="hero-visual">
+
+                <div class="visual-card main-card">
+
+                    <div class="document-icon">PDF</div>
+
+                    <h3>Research Analysis</h3>
+
+                    <p>Turn complex papers into useful insights.</p>
+
+                    <div class="visual-line"></div>
+                    <div class="visual-line short"></div>
+                    <div class="visual-line"></div>
+
+                    <div class="visual-tags">
+                        <span>Research</span>
+                        <span>Insights</span>
+                    </div>
+
+                </div>
+
+                <div class="floating-card">
+                    <span class="floating-dot"></span>
+                    Intelligent Research Workspace
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="features" id="about">
+
+            <div class="section-heading">
+                <p class="eyebrow">EXPLORE THE PLATFORM</p>
+                <h2>Research, made simpler.</h2>
+                <p>
+                    Everything begins with understanding the paper.
+                </p>
+            </div>
+
+            <div class="feature-grid">
+
+                <div class="feature-card">
+                    <div class="feature-icon">01</div>
+                    <h3>Paper Extraction</h3>
+                    <p>
+                        Extract readable text from uploaded academic
+                        PDF documents.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">02</div>
+                    <h3>Research Insights</h3>
+                    <p>
+                        Build a foundation for summaries, keywords
+                        and deeper paper analysis.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">03</div>
+                    <h3>Paper Exploration</h3>
+                    <p>
+                        Work towards comparing research papers and
+                        exploring potential research gaps.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="upload-section" id="upload">
+
+            <div class="section-heading">
+                <p class="eyebrow">GET STARTED</p>
+                <h2>Start your research.</h2>
+                <p>
+                    Upload an academic paper to begin analyzing it.
+                </p>
+            </div>
+
+            <div class="upload-box">
+
+                <div class="upload-icon">↑</div>
+
+                <h3>Upload Research Paper</h3>
+
+                <p>Select a PDF document (Maximum 15 MB)</p>
+
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="flash-message">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <form action="{{ url_for('upload') }}"
+                      method="POST"
+                      enctype="multipart/form-data">
+
+                    <input
+                        type="file"
+                        name="paper"
+                        accept=".pdf,application/pdf"
+                        required
+                    >
+
+                    <button type="submit" class="upload-button">
+                        Analyze Research Paper →
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        <a href="/" class="logo">Research<span>Scope.</span></a>
+
+        <p>
+            Making academic research easier to explore.
+        </p>
+
+        <p class="copyright">
+            © 2026 ResearchScope. All rights reserved.
+        </p>
+    </footer>
+
+</body>
+</html>
